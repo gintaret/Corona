@@ -30,13 +30,16 @@ public class LoginActivity extends AppCompatActivity { //klasės pradžia
                 String usernameStr = username.getText().toString(); //String visuomet is didziosios raides
                 String passwordStr = password.getText().toString();
 
-                Toast.makeText(LoginActivity.this, "Prisijungimo vardas: "+ //tarp skliausteliu yra parametrai ir sujungia eilutes
-                                usernameStr + "\n" + "Slaptažodis: " + passwordStr,
-                        Toast.LENGTH_LONG).show();
-
-                Intent goToSearchActivity = new Intent(LoginActivity.this, SearchActivity.class); // is kur (pirmas parametras) i kur (antras parametras); i new Intent() labai nesigilinti kol kas, taip tiesiog reikia. This reiskia, jog siame lange esu, gali buti net be zodziu LoginActivity. o class reiskia, jog i kuri eisime langa
-                startActivity(goToSearchActivity);
-
+                username.setError(null);    //issivalome klaidu zurnala (username)
+                if (Validation.isUsernameValid(usernameStr) && Validation.isPasswordValid(passwordStr)){  //if zodziu prasideda salyga, turi buti visada skliausteliuose; jeigu bus validus duomenys, pereisim is vieno lango i kita
+                    //Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_invalid_username), Toast.LENGTH_LONG).show();
+                    Intent goToSearchActivity = new Intent(LoginActivity.this, SearchActivity.class); // is kur (pirmas parametras) i kur (antras parametras); i new Intent() labai nesigilinti kol kas, taip tiesiog reikia. This reiskia, jog siame lange esu, gali buti net be zodziu LoginActivity. o class reiskia, jog i kuri eisime langa
+                    startActivity(goToSearchActivity);
+                }
+                else {  //be skliausteliu () reiskia "visais kitais atvejais", cia salyga, todel skliausteliu nereikia
+                    username.setError(getResources().getString(R.string.login_invalid_credentials));
+                    username.requestFocus();
+                }
 
             } // Onclick pabaiga
         }); //mygtuko paspaudimo funkcijos pabaiga
