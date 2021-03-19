@@ -19,6 +19,7 @@ public class LoginActivity extends AppCompatActivity { //klasės pradžia
         EditText username = findViewById(R.id.username); //susiejamas elementas vaizde su kintamuoju kode
         EditText password = findViewById(R.id.password);
         Button kaipNoriuTaipVadinu = findViewById(R.id.login);
+//        Button Register = findViewById(R.id.register);
 
         // Cia aprasomas kodas, kuris bus susijes su mygtuko paspaudimu
 
@@ -43,6 +44,9 @@ public class LoginActivity extends AppCompatActivity { //klasės pradžia
 
             } // Onclick pabaiga
         }); //mygtuko paspaudimo funkcijos pabaiga
+
+        //Cia bus aprasomas kodas, susijes su register mygtuko paspaudimu
+
 
 
     } //Funkcijos pabaiga
