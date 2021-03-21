@@ -13,5 +13,10 @@
     <string name="register_email">Email</string>
     <string name="register_password">Password</string>
     <string name="register_register">Register</string>
-    <string name="register_invalid_email">Invalid email</string>
+    <string name="register_invalid_username">Username can only contain lowercase or/and uppercase.
+        Username length: from 3 to 20 symbols.</string>
+    <string name="register_invalid_email">Email can only contain lowercase, uppercase, numbers,
+        special symbols (@._-). Email length: from 10 to 50 symbols.</string>
+    <string name="register_invalid_password">Password can only contain lowercase, uppercase, numbers,
+        special symbols (.!@_). Password length: from 5 to 20 symbols.</string>
 </resources>

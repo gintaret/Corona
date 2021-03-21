@@ -9,46 +9,53 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class LoginActivity extends AppCompatActivity { //klasės pradžia
+public class LoginActivity extends AppCompatActivity {  //klasės pradžia
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { //Funkcijos pradžia
         super.onCreate(savedInstanceState); //tuscio lango sukurimas
-        setContentView(R.layout.activity_login); //suteik tusciam langui si vaizda (kodas susiejamas su vaizdu)
+        setContentView(R.layout.activity_login); //suteik tusciam langui si vaizda (kodas susiejamas su vaizdu, vaizda is xml uzdedame ant tuscio lango), jei nebutu sitos eilutes, nereiketu ir pries tai esancios
 
-        EditText username = findViewById(R.id.username); //susiejamas elementas vaizde su kintamuoju kode
-        EditText password = findViewById(R.id.password);
-        Button kaipNoriuTaipVadinu = findViewById(R.id.login);
-//        Button Register = findViewById(R.id.register);
+        EditText usernameET = findViewById(R.id.username); //susiejamas elementas vaizde su kintamuoju kode; EditText yra tipas, o username - kintamojo pavadinimas; pagal id is to elemento issiimsim tai, ka vartotojas suvede; kabliataskis zymi sakinio pabaiga
+        EditText passwordET = findViewById(R.id.password);
+        Button kaipNoriuTaipVadinuBT = findViewById(R.id.login);
+        Button RegisterBT = findViewById(R.id.register);
 
-        // Cia aprasomas kodas, kuris bus susijes su mygtuko paspaudimu
+        // Cia bus aprasomas kodas, susijes su mygtuko Login paspaudimu
 
-        kaipNoriuTaipVadinu.setOnClickListener(new View.OnClickListener() {
+        kaipNoriuTaipVadinuBT.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { // pradzia
+            public void onClick(View v) {   // onClick pradzia
 
                 // cia bus rasomas kodas, kuris bus vykdomas ant paspausto mygtuko
-                String usernameStr = username.getText().toString(); //String visuomet is didziosios raides
-                String passwordStr = password.getText().toString();
+                String usernameStr = usernameET.getText().toString(); //String visuomet is didziosios raides
+                String passwordStr = passwordET.getText().toString();
 
-                username.setError(null);    //issivalome klaidu zurnala (username)
-                if (Validation.isUsernameValid(usernameStr) && Validation.isPasswordValid(passwordStr)){  //if zodziu prasideda salyga, turi buti visada skliausteliuose; jeigu bus validus duomenys, pereisim is vieno lango i kita
+                usernameET.setError(null);    //issivalome klaidu zurnala (username)
+                passwordET.setError(null);  //issivalome klaidu zurnala (password)
+                if (Validation.isUsernameValid(usernameStr) && Validation.isPasswordValid(passwordStr)) {    //if zodziu prasideda salyga, turi buti visada skliausteliuose; jeigu bus validus duomenys, pereisim is vieno lango i kita
                     //Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_invalid_username), Toast.LENGTH_LONG).show();
-                    Intent goToSearchActivity = new Intent(LoginActivity.this, SearchActivity.class); // is kur (pirmas parametras) i kur (antras parametras); i new Intent() labai nesigilinti kol kas, taip tiesiog reikia. This reiskia, jog siame lange esu, gali buti net be zodziu LoginActivity. o class reiskia, jog i kuri eisime langa
+                    Intent goToSearchActivity = new Intent(LoginActivity.this, SearchActivity.class);   // is kur (pirmas parametras) i kur (antras parametras); i new Intent() labai nesigilinti kol kas, taip tiesiog reikia. This reiskia, jog siame lange esu, gali buti net be zodziu LoginActivity. o class reiskia, jog i kuri eisime langa
                     startActivity(goToSearchActivity);
+                } else {  //be skliausteliu () reiskia "visais kitais atvejais", nes mes tu visu atveju negalime nurodyti skliausteliuose; ir cia salyga, todel skliausteliu nereikia
+                    usernameET.setError(getResources().getString(R.string.login_invalid_credentials));
+                    usernameET.requestFocus();
                 }
-                else {  //be skliausteliu () reiskia "visais kitais atvejais", cia salyga, todel skliausteliu nereikia
-                    username.setError(getResources().getString(R.string.login_invalid_credentials));
-                    username.requestFocus();
-                }
 
-            } // Onclick pabaiga
-        }); //mygtuko paspaudimo funkcijos pabaiga
+            }   // Onclick pabaiga
+        }); //mygtuko paspaudimo funkcijos pabaiga - visada bus sie trys simboliai su mygtuko paspaudimo funkcijos pabaiga
 
-        //Cia bus aprasomas kodas, susijes su register mygtuko paspaudimu
+        // Cia bus aprasomas kodas, susijes su mygtuko Register paspaudimu
 
+        RegisterBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Intent goToRegisterActivity = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(goToRegisterActivity);
+            }
+        });
 
-    } //Funkcijos pabaiga
+    }   //Funkcijos pabaiga
 
-} //klasės pabaiga
+}   //klasės pabaiga
