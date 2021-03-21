@@ -18,7 +18,8 @@ public class RegisterActivity extends AppCompatActivity {   //klases pradzia
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState); //tuscio lango sukurimas
-        setContentView(R.layout.activity_register); //suteik tusciam langui si vaizda (kodas susiejamas su vaizdu), vaizda is xml uzdedame ant tuscio lango, jei nebutu sitos eilutes, nereiketu ir pries tai esancios
+        setContentView(R.layout.activity_register); //suteik tusciam langui si vaizda (kodas susiejamas su vaizdu),
+        // vaizda is xml uzdedame ant tuscio lango, jei nebutu sitos eilutes, nereiketu ir pries tai esancios
 
         EditText usernameET = findViewById(R.id.username);  //susiejamas elementas vaizde su kintamuoju kode; EditText yra tipas, o username - kintamojo pavadinimas; pagal id is to elemento issiimsim tai, ka vartotojas suvede; kabliataskis zymi sakinio pabaiga
         EditText emailET = findViewById(R.id.email);
@@ -46,7 +47,8 @@ public class RegisterActivity extends AppCompatActivity {   //klases pradzia
                     Toast.makeText(RegisterActivity.this, "Prisijungimo vardas: " +
                             usernameStr + "\n" + "El.paštas: " + emailStr + "\n" + "Slaptažodis: " +
                             passwordStr, Toast.LENGTH_LONG).show();   //tai, kas yra skliausteliuose, vadinama funkcijos parametrais, siuo atveju 3 parametrai. jeigu sklaisutai tusti, funkcija be parametro
-                    // pirmas parametras nusako, i kuria vieta spausdinti teksta (context - esamas langas), antras - koki teksta spausdinti (gali buti tik viena eilute, bet i ja galime suklijuoti daug eiluciu), trecias - kiek laiko ta teksta rodyti ekrane
+                    // pirmas parametras nusako, i kuria vieta spausdinti teksta (context - esamas langas), antras - koki teksta spausdinti (gali buti tik viena eilute, bet i ja galime suklijuoti daug eiluciu),
+                    // trecias - kiek laiko ta teksta rodyti ekrane
 
                     Intent goToLoginActivity = new Intent(RegisterActivity.this, LoginActivity.class);  //is kurio parametro - i kuri
                     startActivity(goToLoginActivity);
