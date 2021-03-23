@@ -16,7 +16,7 @@ import static com.example.corona.Validation.isEmailValid;
 public class RegisterActivity extends AppCompatActivity {   //klases pradzia
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {    //funkcijos pradzia
         super.onCreate(savedInstanceState); //tuscio lango sukurimas
         setContentView(R.layout.activity_register); //suteik tusciam langui si vaizda (kodas susiejamas su vaizdu),
         // vaizda is xml uzdedame ant tuscio lango, jei nebutu sitos eilutes, nereiketu ir pries tai esancios
@@ -29,11 +29,12 @@ public class RegisterActivity extends AppCompatActivity {   //klases pradzia
         //cia bus aprasomas kodas, susijes su Register mygtuko paspaudimu
         RegisterBT.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {   //onClick pradzia
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);   //kad pasleptu emuliatoriaus klaviatura paspaudus register mygtuka
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
 
-                String usernameStr = usernameET.getText().toString();
+                // cia bus rasomas kodas, kuris bus vykdomas ant paspausto mygtuko
+                String usernameStr = usernameET.getText().toString();   //visuomet is didziosios raides
                 String emailStr = emailET.getText().toString();
                 String passwordStr = passwordET.getText().toString();
 
@@ -42,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {   //klases pradzia
                 passwordET.setError(null);
 
                 if (Validation.isUsernameValid(usernameStr) && Validation.isEmailValid(emailStr) &&
-                        Validation.isPasswordValid(passwordStr)) {
+                        Validation.isPasswordValid(passwordStr)) {  //if zodziu prasideda salyga, turi buti visada skliausteliuose; jeigu bus validus duomenys, pereisim is vieno lango i kita
 
                     Toast.makeText(RegisterActivity.this, "Prisijungimo vardas: " +
                             usernameStr + "\n" + "El.paštas: " + emailStr + "\n" + "Slaptažodis: " +
@@ -53,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity {   //klases pradzia
                     Intent goToLoginActivity = new Intent(RegisterActivity.this, LoginActivity.class);  //is kurio parametro - i kuri
                     startActivity(goToLoginActivity);
 
-                } else {  //jeigu nebus validus, ismesime i ekrana klaida
+                } else {  //jeigu nebus validus, ismesime i ekrana klaida. be skliausteliu () reiskia "visais kitais atvejais", nes mes tu visu atveju negalime nurodyti skliausteliuose;
                     if (!Validation.isUsernameValid(usernameStr)) {
                         usernameET.setError(getResources().getString(R.string.register_invalid_username));
                         usernameET.requestFocus();
@@ -67,8 +68,8 @@ public class RegisterActivity extends AppCompatActivity {   //klases pradzia
                         passwordET.requestFocus();
                     }
                 }
-            }
-        });
+            }   //onClick pabaiga
+        }); //mygtuko paspaudimo funkcijos pabaiga - visada bus sie trys simboliai su mygtuko paspaudimo funkcijos pabaiga
 
-    }
-}
+    }   //funkcijos pabaiga
+}   //klases pabaiga

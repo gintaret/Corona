@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Validation {
-    public static final String USERNAME_REGEX_PATTERN = "^[a-zA-Z0-9]{3,20}$";  //per static prieina; public turi buti, o ne private; ir final turi buti - final galutinis, nebekeicia; tai globalus kintamasis, nes yra klases viduje, o ne funkcijoje, jis bus visur matomas}
+    public static final String USERNAME_REGEX_PATTERN = "^[a-zA-Z0-9]{3,20}$";  //per static prieina; public turi buti, o ne private; ir final turi buti - final galutinis, nebekeicia; tai globalus kintamasis, nes yra klases viduje, o ne funkcijoje, jis bus visur matomas
     public static final String PASSWORD_REGEX_PATTERN = "^[a-zA-Z0-9.!@_]{5,20}$";
     public static final String EMAIL_REGEX_PATTERN = "^[a-zA-Z0-9@._-]{10,50}$";
 
