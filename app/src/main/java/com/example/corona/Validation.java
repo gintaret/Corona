@@ -6,7 +6,12 @@ import java.util.regex.Pattern;
 public class Validation {
     public static final String USERNAME_REGEX_PATTERN = "^[a-zA-Z0-9]{3,20}$";  //per static prieina; public turi buti, o ne private; ir final turi buti - final galutinis, nebekeicia; tai globalus kintamasis, nes yra klases viduje, o ne funkcijoje, jis bus visur matomas}
     public static final String PASSWORD_REGEX_PATTERN = "^[a-zA-Z0-9.!@_]{5,20}$";
-    public static final String EMAIL_REGEX_PATTERN = "^[a-zA-Z0-9@._-]{10,50}$";
+//    "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
+//    public static final String EMAIL_REGEX_PATTERN = "^[a-zA-Z0-9@._-]{10,50}$";
+    public static final String EMAIL_REGEX_PATTERN =  "^[A-Za-z0-9._-]+@[A-Za-z0-9]+.[A-Za-z]{2,50}$";
+    //"^([a-z0-9._-]+){10,50}@([a-z0-9._-]+){2,10}.[a-z]{2,}$" - simbolių skaičių reikia nurodyti trijose vietose: iki @, tarp @ ir taškelio, ir po taškelio.
+    //reikalauja įvesti @, kadangi ji nėra laužtinių skliaustų rėmuose.
+
 
     public static boolean isUsernameValid(String username){ //arba true (1), arba false (0); paima parametrus, kur skliausteliuose. Siuo atveju metoda aprasome, todel tarp skliaustu rasome tipa ir kintamojo pavadinima. Si eilute yra funkcijos antraste (dar vadinama prototipu)
         Pattern pattern = Pattern.compile(USERNAME_REGEX_PATTERN);  //sukuriamos username validacijai taisyklės pagal nurodyta sablona; musu Stringas perduodamas bibliotekos tam tikram metodui, kuris pagal musu nurodytas tam stringui taisykles sukuria sablona
