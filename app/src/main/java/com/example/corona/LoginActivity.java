@@ -21,6 +21,13 @@ public class LoginActivity extends AppCompatActivity {  //klasės pradžia
         Button kaipNoriuTaipVadinuBT = findViewById(R.id.login);
         Button RegisterBT = findViewById(R.id.register);
 
+        System.out.println("I KITM istojo Jonas, kuris uzpilde tokius duomenis i sistema:");
+//        sukuriamas Jono objektas
+        User user=new User("Jonas", "Jonukas");
+        System.out.println(user.getUsername()+" suvede si slaptazodi i sistema:"+user.getPassword());
+        System.out.println("bjaurybe "+user.getUsername()+" pasikeite slaptazodi is "+user.getPassword()+" i ");
+        user.setPassword("Jonaitis");
+        System.out.println("nuo siol "+user.getUsername() +" slaptazodis yra "+user.getPassword());
         // Cia bus aprasomas kodas, susijes su mygtuko Login paspaudimu
 
         kaipNoriuTaipVadinuBT.setOnClickListener(new View.OnClickListener() {
