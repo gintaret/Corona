@@ -1,8 +1,10 @@
 package com.example.corona;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -49,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {  //klasės pradžia
                     usernameET.requestFocus();
                 }
 
-            }   // Onclick pabaiga
+            }   // onClick pabaiga
         }); //mygtuko paspaudimo funkcijos pabaiga - visada bus sie trys simboliai su mygtuko paspaudimo funkcijos pabaiga
 
         // Cia bus aprasomas kodas, susijes su mygtuko Register paspaudimu
