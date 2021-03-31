@@ -23,13 +23,13 @@ public class LoginActivity extends AppCompatActivity {  //klasės pradžia
         Button kaipNoriuTaipVadinuBT = findViewById(R.id.login);
         Button RegisterBT = findViewById(R.id.register);
 
-        System.out.println("I KITM istojo Jonas, kuris uzpilde tokius duomenis i sistema:");
-//        sukuriamas Jono objektas
-        User user=new User("Jonas", "Jonukas");
-        System.out.println(user.getUsername()+" suvede si slaptazodi i sistema:"+user.getPassword());
-        System.out.println("bjaurybe "+user.getUsername()+" pasikeite slaptazodi is "+user.getPassword()+" i ");
-        user.setPassword("Jonaitis");
-        System.out.println("nuo siol "+user.getUsername() +" slaptazodis yra "+user.getPassword());
+//        System.out.println("I KITM istojo Jonas, kuris uzpilde tokius duomenis i sistema:");
+////        sukuriamas Jono objektas
+//        User user=new User("Jonas", "Jonukas");
+//        System.out.println(user.getUsername()+" suvede si slaptazodi i sistema:"+user.getPassword());
+//        System.out.println("bjaurybe "+user.getUsername()+" pasikeite slaptazodi is "+user.getPassword()+" i ");
+//        user.setPassword("Jonaitis");
+//        System.out.println("nuo siol "+user.getUsername() +" slaptazodis yra "+user.getPassword());
         // Cia bus aprasomas kodas, susijes su mygtuko Login paspaudimu
 
         kaipNoriuTaipVadinuBT.setOnClickListener(new View.OnClickListener() {
@@ -43,7 +43,9 @@ public class LoginActivity extends AppCompatActivity {  //klasės pradžia
                 usernameET.setError(null);    //issivalome klaidu zurnala (username)
                 passwordET.setError(null);  //issivalome klaidu zurnala (password)
                 if (Validation.isUsernameValid(usernameStr) && Validation.isPasswordValid(passwordStr)) {    //if zodziu prasideda salyga, turi buti visada skliausteliuose; jeigu bus validus duomenys, pereisim is vieno lango i kita
-                    //Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_invalid_username), Toast.LENGTH_LONG).show();
+                    User user = new User(usernameStr, passwordStr); //sukonstruotas naujas objektas
+//                    System.out.println("prisijungimo vardas: " + user.getUsername() + "\n" + "slaptazodis: " + user.getPassword());
+//                    Toast.makeText(LoginActivity.this, "prisijungimo vardas: " + user.getUsername() + "\n" + "slaptazodis: " + user.getPassword(),Toast.LENGTH_LONG).show();
                     Intent goToSearchActivity = new Intent(LoginActivity.this, SearchActivity.class);   // is kur (pirmas parametras) i kur (antras parametras); i new Intent() labai nesigilinti kol kas, taip tiesiog reikia. This reiskia, jog siame lange esu, gali buti net be zodziu LoginActivity. o class reiskia, jog i kuri eisime langa
                     startActivity(goToSearchActivity);
                 } else {  //be skliausteliu () reiskia "visais kitais atvejais", nes mes tu visu atveju negalime nurodyti skliausteliuose; ir cia salyga, todel skliausteliu nereikia
