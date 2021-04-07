@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,18 +25,26 @@ public class LoginActivity extends AppCompatActivity {  //klasės pradžia
         Button kaipNoriuTaipVadinuBT = findViewById(R.id.login);
         Button RegisterBT = findViewById(R.id.register);
 
-//        System.out.println("I KITM istojo Jonas, kuris uzpilde tokius duomenis i sistema:");
-////        sukuriamas Jono objektas
-//        User user=new User("Jonas", "Jonukas");
-//        System.out.println(user.getUsername()+" suvede si slaptazodi i sistema:"+user.getPassword());
-//        System.out.println("bjaurybe "+user.getUsername()+" pasikeite slaptazodi is "+user.getPassword()+" i ");
-//        user.setPassword("Jonaitis");
-//        System.out.println("nuo siol "+user.getUsername() +" slaptazodis yra "+user.getPassword());
-        // Cia bus aprasomas kodas, susijes su mygtuko Login paspaudimu
+        CheckBox rememberMe = findViewById(R.id.remember_me);
 
-        kaipNoriuTaipVadinuBT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {   // onClick pradzia
+        User user = new User(LoginActivity.this);   //turi duomenis
+
+        rememberMe.setChecked(user.isRememberedForLogin()); //kokia paskutini karta buvo suteikta reiksme (true arba fase)
+
+        if (rememberMe.isChecked()){    //patikriname is karto uzkrovus langa
+            usernameET.setText(user.getUsernameForLogin(), TextView.BufferType.EDITABLE);   //editText viduje pateiksime
+            //bus galima redaguoti(pasikeisti) del EDITABLE
+            passwordET.setText(user.getPasswordForLogin(), TextView.BufferType.EDITABLE);
+        }
+        else {
+            usernameET.setText("", TextView.BufferType.EDITABLE);   //nes is SharedPreferences interf. galima paiimti is visur
+            passwordET.setText("", TextView.BufferType.EDITABLE);
+        }
+
+        // Cia bus aprasomas kodas, susijes su mygtuko Login paspaudimu
+        kaipNoriuTaipVadinuBT.setOnClickListener(new View.OnClickListener() {   //new - kuriamas naujas objektas
+            @Override   //paspaudus mygtuka
+            public void onClick(View v) {   // onClick pradzia paspaudus mygtuka
 
                 // cia bus rasomas kodas, kuris bus vykdomas ant paspausto mygtuko
                 String usernameStr = usernameET.getText().toString(); //String visuomet is didziosios raides
@@ -42,10 +52,22 @@ public class LoginActivity extends AppCompatActivity {  //klasės pradžia
 
                 usernameET.setError(null);    //issivalome klaidu zurnala (username)
                 passwordET.setError(null);  //issivalome klaidu zurnala (password)
+
                 if (Validation.isUsernameValid(usernameStr) && Validation.isPasswordValid(passwordStr)) {    //if zodziu prasideda salyga, turi buti visada skliausteliuose; jeigu bus validus duomenys, pereisim is vieno lango i kita
                     User user = new User(usernameStr, passwordStr); //sukonstruotas naujas objektas
-//                    System.out.println("prisijungimo vardas: " + user.getUsername() + "\n" + "slaptazodis: " + user.getPassword());
-//                    Toast.makeText(LoginActivity.this, "prisijungimo vardas: " + user.getUsername() + "\n" + "slaptazodis: " + user.getPassword(),Toast.LENGTH_LONG).show();
+
+                //issaugoti SharedPref. duomenis
+
+                    user.setUsernameForLogin(usernameStr);
+                    user.setPasswordForLogin(passwordStr);
+
+                    if(rememberMe.isChecked()){ //ar pazymejome checkbox
+                        user.setRemembermeKeyForLogin(true);    //norime ji issaugoti, kad irasytu i SharedPreferences
+                    }
+                    else {
+                        user.setRemembermeKeyForLogin(false);   //kad kita karta nebutu irasyta
+                    }
+
                     Intent goToSearchActivity = new Intent(LoginActivity.this, SearchActivity.class);   // is kur (pirmas parametras) i kur (antras parametras); i new Intent() labai nesigilinti kol kas, taip tiesiog reikia. This reiskia, jog siame lange esu, gali buti net be zodziu LoginActivity. o class reiskia, jog i kuri eisime langa
                     startActivity(goToSearchActivity);
                 } else {  //be skliausteliu () reiskia "visais kitais atvejais", nes mes tu visu atveju negalime nurodyti skliausteliuose; ir cia salyga, todel skliausteliu nereikia
