@@ -21,11 +21,9 @@ public class User { //visada is didziosios, nes klase viena
     public User(){
 //        bevardis konstruktorius (galima jo ir nekurti - sukuriamas automatiskai)
     }
-
-//    sis konstruktorius skirtas prisijungimo langui, perduosime du parametrus:
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
+    //konstruktorius (jau panaudotas prisijungimo lange LoginActivity)
+    public User (Context context) {
+        this.sharedPreferences = context.getSharedPreferences(User.PREFERENCES_PACKAGE_NAME, Context.MODE_PRIVATE);
     }
 
 //    sis konstruktorius skirtas registracijos langui, perduosime tris parametrus:
@@ -62,10 +60,7 @@ public class User { //visada is didziosios, nes klase viena
 
 //    toliau viskas su shared preferences, nes login prisijungimo duomenis turi issaugoti musu narsykle. Registracijos atveju duomenys saugomi ne musu narsykleje, o nukeliauja i DB.
 
-    //konstruktorius (jau panaudotas prisijungimo lange LoginActivity)
-    public User (Context context) {
-        this.sharedPreferences = context.getSharedPreferences(User.PREFERENCES_PACKAGE_NAME, Context.MODE_PRIVATE);
-    }
+
 
     public String getUsernameForLogin() {
         return this.sharedPreferences.getString(USERNAME_KEY, "");  //tarp kabuciu tuscia, toks formatas, bet grazins ne tuscia, o tai, ka irasys vartotojas (get atitinka grazinancia funkcija be parametru)

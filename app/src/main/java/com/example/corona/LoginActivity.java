@@ -29,14 +29,13 @@ public class LoginActivity extends AppCompatActivity {  //klasės pradžia
 
         User user = new User(LoginActivity.this);   //turi duomenis
 
-        rememberMe.setChecked(user.isRememberedForLogin()); //kokia paskutini karta buvo suteikta reiksme (true arba fase)
+        rememberMe.setChecked(user.isRememberedForLogin()); //patikriname, ar paskutini karta vartotojas buvo pazymejes remember me (kokia paskutini karta buvo suteikta reiksme (true arba fase))
 
-        if (rememberMe.isChecked()){    //patikriname is karto uzkrovus langa
+        if (rememberMe.isChecked()) {    //patikriname is karto uzkrovus langa
             usernameET.setText(user.getUsernameForLogin(), TextView.BufferType.EDITABLE);   //editText viduje pateiksime
             //bus galima redaguoti(pasikeisti) del EDITABLE
             passwordET.setText(user.getPasswordForLogin(), TextView.BufferType.EDITABLE);
-        }
-        else {
+        } else {     //jeigu vartotojas nepazymejo checkbox remember me
             usernameET.setText("", TextView.BufferType.EDITABLE);   //nes is SharedPreferences interf. galima paiimti is visur
             passwordET.setText("", TextView.BufferType.EDITABLE);
         }
@@ -54,17 +53,16 @@ public class LoginActivity extends AppCompatActivity {  //klasės pradžia
                 passwordET.setError(null);  //issivalome klaidu zurnala (password)
 
                 if (Validation.isUsernameValid(usernameStr) && Validation.isPasswordValid(passwordStr)) {    //if zodziu prasideda salyga, turi buti visada skliausteliuose; jeigu bus validus duomenys, pereisim is vieno lango i kita
-                    User user = new User(usernameStr, passwordStr); //sukonstruotas naujas objektas
+                    User user = new User(LoginActivity.this); //sukonstruotas naujas objektas
 
-                //issaugoti SharedPref. duomenis
+                    //issaugoti SharedPref. duomenis
 
                     user.setUsernameForLogin(usernameStr);
                     user.setPasswordForLogin(passwordStr);
 
-                    if(rememberMe.isChecked()){ //ar pazymejome checkbox
+                    if (rememberMe.isChecked()) { //ar pazymejome checkbox
                         user.setRemembermeKeyForLogin(true);    //norime ji issaugoti, kad irasytu i SharedPreferences
-                    }
-                    else {
+                    } else {
                         user.setRemembermeKeyForLogin(false);   //kad kita karta nebutu irasyta
                     }
 
