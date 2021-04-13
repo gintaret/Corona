@@ -7,14 +7,17 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
     public static final String COVID_API = "https://covid19-api.weedmark.systems/api/v1/stats";
+    private ArrayList<Corona> coronaList = new ArrayList<Corona>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,12 +76,16 @@ public class SearchActivity extends AppCompatActivity {
                 ).show();
             }
             if(statusCode == HttpURLConnection.HTTP_OK) {
-                System.err.println(jsonObject.toString());   //spausdina terminala, pasitikrinimui; bandys spausdinti kaip klaida, kita spalva
-                Toast.makeText(
-                        SearchActivity.this,
-                       jsonObject.toString(),
-                        Toast.LENGTH_LONG
-                ).show();
+                //System.err.println(jsonObject.toString());   //spausdina terminala, pasitikrinimui; bandys spausdinti kaip klaida, kita spalva
+                JSONArray jsonArray = null;
+                try {
+                    jsonArray = JSON.getJSONArray(jsonObject);
+                    coronaList = JSON.getList(jsonArray);
+                    System.out.println("Italy covidStats:" + JSON.getCoronaListByCountry(coronaList, "Italy"));
+                } catch (JSONException e) {
+                    System.out.println(getResources().getString(R.string.search_error_reading_data) + e.getMessage());
+                }
+
             } else {   // kazkas nepavyko (serveris negrazino 200 code)
               String message = null;
                 try {
