@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBlue"
+    android:background="@color/colorYellow"
     android:orientation="vertical"
     android:padding="10dp">
 
@@ -23,7 +23,7 @@
         android:text="@string/app_title"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textColor="@color/colorGreen"
+        android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold" />
 
