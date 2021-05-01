@@ -36,47 +36,39 @@ public class JSON {
         }
     }
 
-    public static ArrayList<Corona> getList(JSONArray jsonArray) throws JSONException{
-        ArrayList<Corona> coronaList = new ArrayList<Corona>();
-        //isimti data is JSON ir issaugoti corona objektu sarase (coronaList)
+    public static ArrayList<Coctails> getList(JSONArray jsonArray) throws JSONException{
+        ArrayList<Coctails> coctailsList = new ArrayList<Coctails>();
+        //isimti data is JSON ir issaugoti coctails objektu sarase (coctailsList)
         for (int i=0; i<jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
-            Corona corona = new Corona(
-//                public Corona(String country, String lastUpdate, String keyID, int confirmed, int deaths)
-                    jsonObject.getString("country"),
-                    jsonObject.getString("lastUpdate"),
-                    jsonObject.getString("keyId"),
-                    jsonObject.getInt("confirmed"),
-                    jsonObject.getInt("deaths")
-            );
-            coronaList.add(corona);
-        }
 
-        return coronaList;
+            Coctails coctails = new Coctails(
+                    jsonObject.getString("idDrink"),
+                    jsonObject.getString("strDrink"),
+                    jsonObject.getString("strCategory"),
+                    jsonObject.getString("strAlcoholic"),
+                    jsonObject.getString("strGlass")
+            );
+            coctailsList.add(coctails);
+        }
+        return coctailsList;
     }
 
-    public static JSONArray getJSONArray(JSONObject jsonObject) throws JSONException{
-        //pasalinama is JSON visa nereikalinga informacija (metaduomenys), paliekant tik covid19Stats masyva
-        int jsonLength = jsonObject.toString().length();
-        String covid19Stats = "{" + jsonObject.toString().substring(96, jsonLength) + "}"; //substring iskerpa dali simboliu is eilutes, prades nuo 96 iki pacio galo
-
-        // string i JSON object
-        JSONObject jsonObject1 = new JSONObject(covid19Stats);
-
+    public static JSONArray getJSONArray(JSONObject json) throws JSONException{
         //JSON Object i JSON Array
-        JSONArray jsonArray = jsonObject1.getJSONArray("covid19Stats");
+        JSONArray jsonArray = json.getJSONArray("drinks");
 
         return jsonArray;
     }
 
-    public static ArrayList<Corona> getCoronaListByCountry(ArrayList<Corona> coronaArrayList, String country){
-        ArrayList<Corona> coronaListByCountry = new ArrayList<Corona>();
-        for (Corona corona : coronaArrayList) { //kaireje sukuriamas tos klases objektas, per kurios sarasa iteruojame (desineje)
-            if(corona.getKeyID().contains(country)){ //contains metodas iesko zodzio dalies
-                coronaListByCountry.add(corona);
+    public static ArrayList<Coctails> getCoctailsByQuery(ArrayList<Coctails> coctailsArrayList, String coctailName){
+        ArrayList<Coctails> coctailsByQuery = new ArrayList<Coctails>();
+        for (Coctails coctails : coctailsArrayList) { //kaireje sukuriamas tos klases objektas, per kurios sarasa iteruojame (desineje)
+            if(coctails.getName().contains(coctailName)){ //contains metodas iesko zodzio dalies arba viso zodzio
+                coctailsByQuery.add(coctails);
             }
         }
-        return coronaListByCountry;
+        return coctailsByQuery;
     }
 
 }

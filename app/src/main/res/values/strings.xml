@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Corona</string>
-    <string name="app_title">infection status online</string>
+    <string name="app_name">Coctails</string>
+    <string name="app_title">Coctails recipes</string>
 
     <string name="login_username">Username</string>
     <string name="login_password">Password</string>
@@ -19,7 +19,7 @@
         special symbols (@._-). Email length: from 10 to 50 symbols.</string>
     <string name="register_invalid_password">Password can only contain lowercase, uppercase, numbers,
         special symbols (.!@_). Password length: from 5 to 20 symbols.</string>
-    <string name="search_loading_data">Please wait for Covid data</string>
+    <string name="search_loading_data">Please wait for coctails data to be displayed</string>
     <string name="search_error_reading_data">Couldnt read data from API. For more information:</string>
     <string name="search_no_results">No results for this query: </string>
 </resources>

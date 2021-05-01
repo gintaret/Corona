@@ -7,45 +7,45 @@
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/textKeyId"
+        android:id="@+id/textName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:text="Country"
+        android:text="Name"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="@color/purple_200" />
 
     <TextView
-        android:id="@+id/textConfirmed"
+        android:id="@+id/textAlcoholic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="5dp"
-        android:text="Confirmed"
+        android:text="Alcoholic"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/teal_700" />
 
     <TextView
-        android:id="@+id/textDeaths"
+        android:id="@+id/textGlass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="23dp"
         android:layout_marginRight="5dp"
-        android:text="Deaths"
+        android:text="Glass type"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/teal_200" />
 
     <TextView
-        android:id="@+id/textLastUpdate"
+        android:id="@+id/textCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textKeyId"
+        android:layout_below="@id/textName"
         android:layout_marginLeft="5dp"
-        android:text="Last Update"
+        android:text="Category"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/colorGrey" />
 
