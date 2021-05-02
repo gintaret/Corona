@@ -1,4 +1,4 @@
-package com.example.corona;
+package com.example.coctails;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,8 +10,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import static com.example.corona.Validation.isEmailValid;
 
 public class RegisterActivity extends AppCompatActivity {   //klases pradzia
 

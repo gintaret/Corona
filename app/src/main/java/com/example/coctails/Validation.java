@@ -1,4 +1,4 @@
-package com.example.corona;
+package com.example.coctails;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

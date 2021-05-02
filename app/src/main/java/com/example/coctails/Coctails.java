@@ -1,12 +1,13 @@
-package com.example.corona;
+package com.example.coctails;
 
-public class Coctails {
+public class Coctails { //apsirasome klases kintamuosius
     private String id;
     private String name;
     private String category;
     private String alcoholic;
     private String glass;
 
+    //kuriame konstruktoriu
     public Coctails(String id, String name, String category, String alcoholic, String glass) {
         this.id = id;
         this.name = name;
@@ -15,9 +16,8 @@ public class Coctails {
         this.glass = glass;
     }
 
-    public String getId() {
-        return id;
-    }
+    //kuriame geterius ir seterius
+    public String getId() { return id; }
 
     public void setId(String id) {
         this.id = id;
@@ -56,7 +56,7 @@ public class Coctails {
     }
 
     @Override
-    public String toString() {
+    public String toString() {  //metodas toString panasiai kaip system.out.println (tik pastarasis atspausdintu negraziai); toString grazina visa irasa su raktais (pozymiais) ir reiksmemis
         return "Coctails{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
@@ -64,5 +64,6 @@ public class Coctails {
                 ", alcoholic='" + alcoholic + '\'' +
                 ", glass type=" + glass +
                 '}';
+        //viena karta nusiskaitome is JSON i sarasus ir visi ieskojimai vyksta is sarasu
     }
 }

@@ -1,4 +1,4 @@
-package com.example.corona;
+package com.example.coctails;
 
 import android.content.Context;
 
@@ -17,10 +17,8 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private LayoutInflater inflater;
     List<Coctails> drinks;  //tie duomenys, kuriuos perduodame tam adapteriui per konstruktoriu (pagal pavadinimus)
 
-    public static final String ENTRY="com.corona.coronazp20t.ENTRY";
-
     // create constructor to initialize context and data sent from SearchActivity
-    //sukonstruojame adapterio konstruktoriu, perduodame is SearchActivity langa, kuriame esame, ir sarasa pagal valstybe
+    //sukonstruojame adapterio konstruktoriu, perduodame is SearchActivity konteksta (langa, kuriame esame), ir sarasa pagal kokteilius
     public Adapter(Context context, List<Coctails> data) {
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -39,11 +37,11 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Bind data
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {    //apjungia konteineri, kuri mes sukuriame
         // Get current position of item in RecyclerView to bind data and assign values from list
         MyHolder myHolder = (MyHolder) holder;  //pirmas parametras
         Coctails current = drinks.get(position);    //antras onBindViewHolder'io parametras; //pozicija yra elementu indeksas sarase; pvz., jei turime 10 elementu sarase, tai sukurs 10 korteliu ir i kiekv kortele patalpins konkretu irasa su duomenimis
-        //uzpildysime kortele duomenimis is saraso
+        //uzpildysime kortele (myHolder) duomenimis is saraso
         myHolder.textName.setText(current.getName());
         myHolder.textCategory.setText("Category: " + current.getCategory());
         myHolder.textAlcoholic.setText("Alcoholic: " + current.getAlcoholic());
@@ -58,7 +56,7 @@ public class Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     //galimybe spausdinti, kiek is viso turime irasu
 
     class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        //MyHolder yra vidine klase - 7 temai - kai atspausdinsime visas korteles, galesime ant bet kurios korteles spausti ir atidaryti naujame lange
+        //MyHolder yra vidine klase - 7 temai - kai atspausdinsime visas korteles, galesime ant bet kurios korteles spausti ir atidaryti naujame lange daugiau duomenu
         TextView textName;
         TextView textCategory;
         TextView textAlcoholic;

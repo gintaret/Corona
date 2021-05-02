@@ -1,4 +1,4 @@
-package com.example.corona;
+package com.example.coctails;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -20,7 +20,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.HttpURLConnection;
 import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity { //cia yra globalus kintamieji, kurie aprasomi klases virsuje
@@ -29,7 +28,7 @@ public class SearchActivity extends AppCompatActivity { //cia yra globalus kinta
     private ArrayList<Coctails> coctailsList = new ArrayList<Coctails>();
 
     private RecyclerView recyclerView;  //korteliu vaizdas
-    private Adapter adapter;    //tarpininkas tarp SearchActivity ir xml, apjungia dvi skirtingas klases adapteris
+    private Adapter adapter;    //tarpininkas tarp SearchActivity(kur vartotojas gales kazka ivesti) ir container_coctails.xml (kur piesime korteles), apjungia dvi skirtingas klases adapteris
 
     private SearchView searchView = null;   //paieskos vaizdas, kuriame piesime
 
@@ -62,7 +61,7 @@ public class SearchActivity extends AppCompatActivity { //cia yra globalus kinta
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {   //atsiranda padidinimo stiklas
+    public boolean onOptionsItemSelected(MenuItem item) {   //atsiranda padidinimo stiklas; kartais naudojamas aplikacijose, kur 3 taskai buna desiniame kampe
         return super.onOptionsItemSelected(item);
     }
 
@@ -71,7 +70,7 @@ public class SearchActivity extends AppCompatActivity { //cia yra globalus kinta
     protected void onNewIntent(Intent intent) {
         // Get search query
         super.onNewIntent(intent);
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {  //issitraukiame, ka vartotojas ivede
             String query = intent.getStringExtra(SearchManager.QUERY);  //jei vartotojas ives Margarita, tai tas query ir bus Margarita (issitraukiame, ka vartotojas ivede)
             if (searchView != null) {
                 searchView.clearFocus();    //isvalo kursoriu, kad nemirksetu
@@ -99,33 +98,33 @@ public class SearchActivity extends AppCompatActivity { //cia yra globalus kinta
             super.onPreExecute();
             progressDialog.setMessage(getResources().getString(R.string.search_loading_data));
             progressDialog.setCancelable(false);    //turi islaukti, kol gris kazkokia info
-            progressDialog.show();  //kad matytu vaizda
+            progressDialog.show();  //kad matytu besisukanti vaizda
         }
 
         @Override   // Jis skirtas gavimui JSON is API
         protected JSONObject doInBackground(String... strings) {    //jis bus vykdomas tuo metu, kai vartotojas matys besisukanti (progress) dialoga.
-            try {
+            try {   //apdorojamos isimtys
                 JSONObject jsonObject = JSON.readJsonFromUrl(COCTAILS_API); //sioje vietoje perduosime URL
-                return jsonObject;
-            } catch (IOException e) {
+                return jsonObject;  //jeigu viskas bus gerai, grazins JSON object
+            } catch (IOException e) {   //kad programa neuzluztu apdorojant tas isimtis (input out exception)
                 Toast.makeText(
                         SearchActivity.this,
                         getResources().getString(R.string.search_error_reading_data) + e.getMessage(),
                         Toast.LENGTH_LONG
                 ).show();
-            } catch (JSONException e) {
+            } catch (JSONException e) { //JSON exception
                 Toast.makeText(
                         SearchActivity.this,
                         getResources().getString(R.string.search_error_reading_data) + e.getMessage(),
                         Toast.LENGTH_LONG
                 ).show();
             }
-            return null;
+            return null;    //grazinsime null, nera JSON, jo negavome
         }   //doInBackground pabaiga
 
         @Override
         protected void onPostExecute(JSONObject jsonObject) {    //execute atitinka doInBackground'a
-            progressDialog.dismiss();
+            progressDialog.dismiss();   //panaikiname besisukanti dialoga, nes jau gavome background, jau atvaizduosime kazka vartotojui
 
                 JSONArray jsonArray = null;
                 try {

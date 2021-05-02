@@ -1,15 +1,12 @@
-package com.example.corona;
+package com.example.coctails;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,16 +24,16 @@ public class LoginActivity extends AppCompatActivity {  //klasės pradžia
 
         CheckBox rememberMe = findViewById(R.id.remember_me);
 
-        User user = new User(LoginActivity.this);   //turi duomenis
+        User user = new User(LoginActivity.this);   //turi duomenis ("pinigine")
 
-        rememberMe.setChecked(user.isRememberedForLogin()); //patikriname, ar paskutini karta vartotojas buvo pazymejes remember me (kokia paskutini karta buvo suteikta reiksme (true arba fase))
+        rememberMe.setChecked(user.isRememberedForLogin()); //patikriname, ar paskutini karta vartotojas buvo pazymejes remember me (kokia paskutini karta buvo suteikta reiksme (true arba false))
 
-        if (rememberMe.isChecked()) {    //patikriname is karto uzkrovus langa
-            usernameET.setText(user.getUsernameForLogin(), TextView.BufferType.EDITABLE);   //editText viduje pateiksime
-            //bus galima redaguoti(pasikeisti) del EDITABLE
+        if (rememberMe.isChecked()) {    //true arba false; patikriname is karto uzkrovus langa
+            usernameET.setText(user.getUsernameForLogin(), TextView.BufferType.EDITABLE);   //sioje vietoje editText irasysime ta reiksme is SharedPreferences, kuria paskutini karta buvo prisijungta
+            //bus galima redaguoti(pasikeisti) prisijungimo varda del EDITABLE
             passwordET.setText(user.getPasswordForLogin(), TextView.BufferType.EDITABLE);
-        } else {     //jeigu vartotojas nepazymejo checkbox remember me
-            usernameET.setText("", TextView.BufferType.EDITABLE);   //nes is SharedPreferences interf. galima paiimti is visur
+        } else {     //jeigu vartotojas paskutini karta nepazymejo checkbox remember me
+            usernameET.setText("", TextView.BufferType.EDITABLE);   //jeigu vartotojas nepazymejo, tai neturime isvesti jam prisijungimo duomenu, vartotojas tures is naujo susivesti prisijungimo duomenis, bet musu "pinigineje" islike tie duomenys, nes gali buti, kad veliau prireiks tu duomenu;  i SharedPreferences galima kreiptis is bet kur
             passwordET.setText("", TextView.BufferType.EDITABLE);
         }
 
@@ -53,14 +50,14 @@ public class LoginActivity extends AppCompatActivity {  //klasės pradžia
                 passwordET.setError(null);  //issivalome klaidu zurnala (password)
 
                 if (Validation.isUsernameValid(usernameStr) && Validation.isPasswordValid(passwordStr)) {    //if zodziu prasideda salyga, turi buti visada skliausteliuose; jeigu bus validus duomenys, pereisim is vieno lango i kita
-                    User user = new User(LoginActivity.this); //sukonstruotas naujas objektas
+                    User user = new User(LoginActivity.this); //sukonstruotas naujas User klases objektas user
 
-                    //issaugoti SharedPref. duomenis
+                    //issaugosime SharedPref. duomenis
 
                     user.setUsernameForLogin(usernameStr);
                     user.setPasswordForLogin(passwordStr);
 
-                    if (rememberMe.isChecked()) { //ar pazymejome checkbox
+                    if (rememberMe.isChecked()) { //tikriname, ar buvo pazymetas checkbox, kai vartotojas suvede prisijungimo duomenis
                         user.setRemembermeKeyForLogin(true);    //norime ji issaugoti, kad irasytu i SharedPreferences
                     } else {
                         user.setRemembermeKeyForLogin(false);   //kad kita karta nebutu irasyta

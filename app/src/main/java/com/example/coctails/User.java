@@ -1,4 +1,4 @@
-package com.example.corona;
+package com.example.coctails;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,36 +11,37 @@ public class User { //visada is didziosios, nes klase viena
 
 //    toliau yra musu raktai
     private SharedPreferences sharedPreferences;
-    private static final String PREFERENCES_PACKAGE_NAME = "com.example.corona";
+    private static final String PREFERENCES_PACKAGE_NAME = "com.example.coctails";
     private static final String USERNAME_KEY = "username";
     private static final String PASSWORD_KEY = "password";
     private static final String REMEMBERME_KEY = "rememberMe";
 
 
-    //2.konstruktorius
+    //2.konstruktorius (musu atveju is viso turime 3 konstruktorius)
     public User(){
 //        bevardis konstruktorius (galima jo ir nekurti - sukuriamas automatiskai)
     }
-    //konstruktorius (jau panaudotas prisijungimo lange LoginActivity)
+    //konstruktorius skirtas naujo vartotojo registracijai (jau panaudotas prisijungimo lange LoginActivity)
     public User (Context context) {
         this.sharedPreferences = context.getSharedPreferences(User.PREFERENCES_PACKAGE_NAME, Context.MODE_PRIVATE);
     }
 
 //    sis konstruktorius skirtas registracijos langui, perduosime tris parametrus:
     public User(String username, String password, String email) {
-        this.username = username;
+        this.username = username;   //pozymis kaireje, parametras desineje
         this.password = password;
         this.email = email;
     }
 
     //3.get'eriai, set'eriai
-
     //    get'eris atitinka grazinancia funkcija be parametru:
     public String getUsernameForRegistration() {
         return username;
     }
     //    set'eris atitinka negrazinancia funkcija su parametrais:
-    public void setUsernameForRegistration(String username) { this.username=username; }
+    public void setUsernameForRegistration(String username) {
+        this.username=username; //username seteri galima istrinti, nes jis sistemoje nekeiciamas turetu buti, unikalus
+    }
 
     public String getPasswordForRegistration() {
         return password;
